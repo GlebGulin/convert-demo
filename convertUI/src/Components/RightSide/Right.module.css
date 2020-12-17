@@ -1,0 +1,6 @@
+.rightcontent {
+    grid-area: r;
+}
+.rightcontent h2{
+    text-align: center;
+}

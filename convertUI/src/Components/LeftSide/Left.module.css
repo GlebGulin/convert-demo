@@ -1,0 +1,6 @@
+.leftcontent {
+    grid-area: l;
+}
+.leftcontent h2 {
+    text-align: center;
+}
