@@ -6,6 +6,8 @@ namespace Models.Entities.JsonToModel
 {
     public class Rates
     {
+        //Dictionary<string, double> Rate;
+
         public double CAD { get; set; }
         public double HKD { get; set; }
         public double ISK { get; set; }
@@ -39,5 +41,6 @@ namespace Models.Entities.JsonToModel
         public double ILS { get; set; }
         public double KRW { get; set; }
         public double PLN { get; set; }
+
     }
 }

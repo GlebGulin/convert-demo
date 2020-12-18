@@ -8,6 +8,7 @@ using System.Linq;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Net;
+using System.Reflection;
 
 namespace Services
 {
@@ -72,31 +73,34 @@ namespace Services
             string jsonpathfrom = "https://api.exchangeratesapi.io/latest?base="+currentCurrency.CurrencyName;
             WebClient web = new WebClient();
             Stream stream = web.OpenRead(jsonpathfrom);
-
             string jsonconfiguration;
             using (var reader = new StreamReader(stream))
-
             {
                 jsonconfiguration = reader.ReadToEnd();
             }
 
+            decimal requiredCoefficient;
             Root result = JsonConvert.DeserializeObject<Root>(jsonconfiguration);
-            
-           
-            try
+            var jo = JObject.Parse(jsonconfiguration).SelectToken("rates").ToObject<Dictionary<string, decimal>>();
+            foreach (KeyValuePair<string, decimal> item in jo)
+            {
+                if(item.Key== finishcurrency.CurrencyName)
                 {
-                    _convertContext.Add(model);
-                    _convertContext.SaveChanges();
-                    
+                    requiredCoefficient = item.Value;
+                    model.ToAmount = model.FromAmount * requiredCoefficient;
+                    try
+                    {
+                        _convertContext.Add(model);
+                        _convertContext.SaveChanges();
+
+                    }
+                    catch (System.Exception)
+                    {
+                        return false;
+                    }
                 }
-                catch (System.Exception)
-                {
-                    return false;
-                }
+            }
             return true;
-
-
-
         }
        
         public Root ReturnRoot()
