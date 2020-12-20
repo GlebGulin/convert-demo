@@ -16,7 +16,7 @@ namespace Services
     {
         IEnumerable<HistoryConvert> GetHistory();
         IEnumerable<Currency> GetCurrencies();
-        bool AddItemHistory(HistoryConvert model);
+        HistoryConvert AddItemHistory(HistoryConvert model);
         Root ReturnRoot();
     }
     public class ConvertService : IConvertService
@@ -65,7 +65,7 @@ namespace Services
         }
         
         ////////////
-        public bool AddItemHistory(HistoryConvert model)
+        public HistoryConvert AddItemHistory(HistoryConvert model)
         {
 
             Currency currentCurrency = _convertContext.currencies.Where(x => x.Id.Equals(model.FromCurrencyId)).FirstOrDefault();
@@ -96,11 +96,11 @@ namespace Services
                     }
                     catch (System.Exception)
                     {
-                        return false;
+                        return null;
                     }
                 }
             }
-            return true;
+            return model;
         }
        
         public Root ReturnRoot()

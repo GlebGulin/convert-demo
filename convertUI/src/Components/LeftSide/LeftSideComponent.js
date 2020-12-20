@@ -8,7 +8,7 @@ const LeftSideComponent = (props) => {
         <select>
         {
                     props.currencies.map((u=>(
-                    <option value={u.currencyName}>{u.currencyName}</option>
+                    <option value={u.currencyName} key={u.currencyName.toString()}>{u.currencyName}</option>
                 )))
                 }
         </select>
@@ -20,7 +20,7 @@ const LeftSideComponent = (props) => {
                 )))
                 }
         </select>
-        <div><button>Exchange</button></div>
+        <div><button onClick={props.oneClickExchange}>Exchange</button></div>
     </div>)
 }
 export default LeftSideComponent;

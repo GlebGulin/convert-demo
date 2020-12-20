@@ -16,8 +16,8 @@ const RightSideComponent = (props) => {
         
                 {
                     props.historyData.map(u=>
-                        <tbody>
-                                <td key={u.id}>{u.id}</td>
+                        <tbody key={u.id}>
+                                <td>{u.id}</td>
                                 <td>{u.fromCurrency.currencyName}</td>
                                 <td>{u.fromAmount}</td>
                                 <td>{u.toCurrency.currencyName}</td>
