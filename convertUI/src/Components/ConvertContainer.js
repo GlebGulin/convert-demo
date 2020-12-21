@@ -22,28 +22,21 @@ class ConvertComponent extends React.Component{
         )
     }
     model = {
-        fromAmount: 20,
-        fromCurrencyId: 1,
-        toCurrencyId: 2
+        fromAmount: this.props.fromAmount,
+        fromCurrencyId:this.props.fromCurrencyId,
+        toCurrencyId: this.props.toCurrencyId
+    
+   
     }
-    oneClickExchange = (model) =>{
-        // this.props.addNewItem();
+    oneClickExchange = (model) => {
+        this.props.addNewItem();
         
-        // PostNewItem(fromAmount, fromCurrencyId, toCurrencyId).then(data =>
-        //     {
-        //         debugger;
-        //         console.log(data);
-        //     })
-        axios.post(`http://localhost:1589/newitem`, JSON.stringify(model),
-        {withCredentials: true})
-        .then(response => 
+        PostNewItem(model).then(data =>
             {
                 debugger;
-                return response.data;
-            }
-    )
-    }
-    
+                console.log(data);
+            })
+       }
 
         render(){
         return<div className={styles.wrapper}>
@@ -59,6 +52,7 @@ class ConvertComponent extends React.Component{
             
         }
     }
+   
 debugger;
 let mapStateToProps = (state) => {
     console.log(state);

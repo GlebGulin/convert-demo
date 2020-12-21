@@ -16,9 +16,9 @@ export const GetAllHistory = () => {
     )
          
 }
-export const PostNewItem = (fromAmount, fromCurrencyId,toCurrencyId) => {
+export const PostNewItem = (model) => {
     
-    return instance.post(`newitem`, {fromAmount, fromCurrencyId,toCurrencyId},
+    return instance.post(`newitem`, {model},
         {withCredentials: true})
         .then(response => 
             {
